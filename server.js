@@ -3,7 +3,7 @@ const express=require('express')
 const cores=require('cors')
 const stripe=require('stripe')('sk_test_51K8OhASItmU7WYKcoDVmaWfDFB049Tg3iWigsd1pNM6nzqOlGD3jkdlm7n7KAsTdM5tr6O2Chvb11Y2nkVKK2rBo00K853BqFq')
 const app=express()
-const port=7000
+const port=process.env.PORT || 7000
 app.use(cores({origin:true}))
 app.use(express.json())
 app.get('/',(req,res)=>{
