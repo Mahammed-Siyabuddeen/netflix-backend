@@ -1,11 +1,16 @@
 var http=require('http')
 const express=require('express')
 const cores=require('cors')
+const nodemailer=require('nodemailer')
+const bodyparser=require('body-parser')
 const stripe=require('stripe')('sk_test_51K8OhASItmU7WYKcoDVmaWfDFB049Tg3iWigsd1pNM6nzqOlGD3jkdlm7n7KAsTdM5tr6O2Chvb11Y2nkVKK2rBo00K853BqFq')
 const app=express()
 const port=process.env.PORT || 7000
 app.use(cores({origin:true}))
 app.use(express.json())
+
+const jsonParser=bodyparser.json()
+
 app.get('/',(req,res)=>{
     res.end('hello wolrd')
 })
@@ -23,7 +28,32 @@ app.post('/payments/create',async(req,res)=>{
 
     })
 })
-
+app.post('/sendmail',jsonParser,async(req,res)=>{
+    const {name,phoneNumber,address,details,}=req.body
+    try {
+        let transporter=nodemailer.createTransport({
+           service:'hotmail',
+           auth:{
+               user:'help.paircare@outlook.com',
+               pass:'#Shi2019326/'
+           }
+        })
+        let info=await transporter.sendMail({
+           from:'help.paircare@outlook.com',
+           to:'help.paircare@outlook.com',
+           subject:'hi',
+           text:`name :${name} \nphoneNumber :${phoneNumber}\naddress:${address} \ninformation:${details}`,
+            
+        })
+        console.log('info :',req.body)
+        return res.status(200).send({data:'successfully send'})
+    } catch (error) {
+        console.log(error.message)
+        return re.status(400).send({message:'fails'})
+        
+    }
+  
+})
 
 
 app.listen(port,()=>{
