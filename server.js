@@ -3,7 +3,7 @@ const express=require('express')
 const cores=require('cors')
 const nodemailer=require('nodemailer')
 const bodyparser=require('body-parser')
-const stripe=require('stripe')('sk_test_51MDnf1SGSXt8TKLFLkF5VFqVnmFkMkBNBrduknoIqWHyjhH2rk5ZK4bkoFnyn7MVaamGylR9ldZNc1RWA5LoJz5f002vAv7rpt')
+const stripe=require('stripe')('SECRET_KEY')
 const app=express()
 const port=process.env.PORT || 7000
 app.use(cores({origin:true}))
