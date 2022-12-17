@@ -4,10 +4,13 @@ const cores=require('cors')
 const nodemailer=require('nodemailer')
 const bodyparser=require('body-parser')
 const stripe=require('stripe')('sk_test_51MDnf1SGSXt8TKLFLkF5VFqVnmFkMkBNBrduknoIqWHyjhH2rk5ZK4bkoFnyn7MVaamGylR9ldZNc1RWA5LoJz5f002vAv7rpt')
-const app=express()
 const port=process.env.PORT || 7000
-app.use(cores({origin:true}))
-app.use(express.json())
+
+const app=express()
+app.use(bodyparser.json({ limit: '30mb', extended: true }))
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
+app.use(cores())
+// app.use(express.json())
 
 const jsonParser=bodyparser.json()
 
