@@ -8,7 +8,7 @@ const port=process.env.PORT || 7000
 
 const app=express()
 app.use(bodyparser.json({ limit: '30mb', extended: true }))
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
+app.use(bodyparser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cores())
 // app.use(express.json())
 
